@@ -3,6 +3,8 @@
 namespace B2BPanel\SharedModels;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Contractor extends Model
 {
 
@@ -19,4 +21,19 @@ class Contractor extends Model
         'regon',
     ];
 
+    /**
+     * Faktury na których kontrahent jest płatnikiem
+     */
+    public function nagsAsRecipient(): HasMany
+    {
+        return $this->hasMany(Nag::class, 'logo');
+    }
+
+    /**
+     * Faktury na których kontrahent jest odbiorcą
+     */
+    public function nagsAsPayer(): HasMany
+    {
+        return $this->hasMany(Nag::class, 'logop');
+    }
 }
