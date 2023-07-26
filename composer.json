@@ -14,5 +14,9 @@
     "psr-4": {
       "B2BPanel\\SharedModels\\": "src"
     }
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/database": "^10.0"
   }
 }
