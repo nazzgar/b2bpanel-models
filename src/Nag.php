@@ -4,6 +4,7 @@ namespace B2BPanel\SharedModels;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Nag extends Model
@@ -24,6 +25,14 @@ class Nag extends Model
         'logo',
         'logop'
     ];
+
+    /**
+     * Linijki dowodu
+     */
+    public function lins(): HasMany
+    {
+        return $this->hasMany(Lin::class, 'nagid', 'nagid');
+    }
 
     /**
      * Odbiorca
