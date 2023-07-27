@@ -26,7 +26,7 @@ class Contractor extends Model
      */
     public function nagsAsRecipient(): HasMany
     {
-        return $this->hasMany(Nag::class, 'logo');
+        return $this->hasMany(Nag::class, 'logo', 'logo');
     }
 
     /**
@@ -34,6 +34,6 @@ class Contractor extends Model
      */
     public function nagsAsPayer(): HasMany
     {
-        return $this->hasMany(Nag::class, 'logop');
+        return $this->hasMany(Nag::class, 'logop', 'logo');
     }
 }
