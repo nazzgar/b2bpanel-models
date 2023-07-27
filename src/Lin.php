@@ -32,7 +32,8 @@ class Lin extends Model
         'netto_suma',
         'brutto_suma',
         'vat_suma',
-        'PD_Wydawnictwo'
+        'PD_Wydawnictwo',
+        'PD_typoferty'
     ];
 
     public function nag(): BelongsTo
