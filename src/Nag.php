@@ -10,6 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Nag extends Model
 {
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'nag_id';
+
 
     /**
      * The attributes that are mass assignable.
