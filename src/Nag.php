@@ -30,7 +30,7 @@ class Nag extends Model
      */
     public function recipient(): BelongsTo
     {
-        return $this->belongsTo(Contractor::class, 'logo');
+        return $this->belongsTo(Contractor::class, 'logo', 'logo');
     }
 
 
@@ -39,6 +39,6 @@ class Nag extends Model
      */
     public function payer(): BelongsTo
     {
-        return $this->belongsTo(Contractor::class, 'logop');
+        return $this->belongsTo(Contractor::class, 'logop', 'logo');
     }
 }
