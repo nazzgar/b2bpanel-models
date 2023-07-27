@@ -15,7 +15,7 @@ class Nag extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'nag_id';
+    protected $primaryKey = 'nagid';
 
 
     /**
