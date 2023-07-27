@@ -33,7 +33,7 @@ class Lin extends Model
         'vat_suma'
     ];
 
-    public function nagsAsRecipient(): BelongsTo
+    public function nag(): BelongsTo
     {
         return $this->belongsTo(Nag::class, 'nagid', 'nagid');
     }
