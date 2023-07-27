@@ -5,6 +5,7 @@ namespace B2BPanel\SharedModels;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lin extends Model
 {
@@ -30,11 +31,17 @@ class Lin extends Model
         'opis',
         'netto_suma',
         'brutto_suma',
-        'vat_suma'
+        'vat_suma',
+        'PD_Wydawnictwo'
     ];
 
     public function nag(): BelongsTo
     {
         return $this->belongsTo(Nag::class, 'nagid', 'nagid');
+    }
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Publisher::class, 'PD_Wydawnictwo', 'grupa');
     }
 }
