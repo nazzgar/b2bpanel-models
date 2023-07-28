@@ -2,6 +2,8 @@
 
 namespace B2BPanel\SharedModels;
 
+use Akaunting\Money\Money;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,5 +46,12 @@ class Lin extends Model
     public function publisher(): BelongsTo
     {
         return $this->belongsTo(Publisher::class, 'PD_Wydawnictwo', 'grupa');
+    }
+
+    protected function cena_netto(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
     }
 }
