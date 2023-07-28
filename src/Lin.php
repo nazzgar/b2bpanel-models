@@ -48,7 +48,7 @@ class Lin extends Model
         return $this->belongsTo(Publisher::class, 'PD_Wydawnictwo', 'grupa');
     }
 
-    protected function cena_netto(): Attribute
+    protected function cenaNetto(): Attribute
     {
         return Attribute::make(
             get: fn (int $value) => Money::PLN($value),
