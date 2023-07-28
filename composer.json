@@ -18,6 +18,6 @@
   "require": {
     "php": "^8.0",
     "illuminate/database": "^10.0",
-    "akaunting/laravel-money": "^5.1"
+    "akaunting/laravel-money": "^4.0.1"
   }
 }
