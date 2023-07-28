@@ -54,4 +54,46 @@ class Lin extends Model
             get: fn (int $value) => Money::PLN($value),
         );
     }
+
+    protected function cenaNettoPoRabacie(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
+
+    protected function cenaBrutto(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
+
+    protected function cenaBruttoPoRabacie(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
+
+    protected function nettoSuma(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
+
+    protected function bruttoSuma(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
+
+    protected function vatSuma(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value) => Money::PLN($value),
+        );
+    }
 }
