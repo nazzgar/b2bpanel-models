@@ -15,6 +15,13 @@ class Contractor extends Model
      */
     protected $primaryKey = 'logo';
 
+    /**
+     * The data type of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
 
     /**
      * The attributes that are mass assignable.
