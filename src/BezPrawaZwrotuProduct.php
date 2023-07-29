@@ -32,6 +32,7 @@ class BezPrawaZwrotuProduct extends Model
         'symkar',
         'kodkres',
         'opis',
+        'isZwrotne',
     ];
 
     /**
