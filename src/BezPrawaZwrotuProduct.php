@@ -43,4 +43,14 @@ class BezPrawaZwrotuProduct extends Model
         'isZwrotne' => 'boolean',
     ];
 
+    public function makeReturnable(): void
+    {
+        $this->update(['isZwrotne' => true]);
+    }
+
+    public function makeUnreturnable(): void
+    {
+        $this->update(['isZwrotne' => false]);
+    }
+
 }
