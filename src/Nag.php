@@ -30,7 +30,17 @@ class Nag extends Model
         'numerdok',
         'opis',
         'logo',
-        'logop'
+        'logop',
+        'is_returnable'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_returnable' => 'boolean',
     ];
 
     /**
