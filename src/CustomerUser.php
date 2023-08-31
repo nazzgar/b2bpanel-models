@@ -4,6 +4,7 @@ namespace B2BPanel\SharedModels;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,4 +43,9 @@ class CustomerUser extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function contractors(): BelongsToMany
+    {
+        return $this->belongsToMany(Contractor::class, 'contractor_customer_user', 'id', 'logo');
+    }
 }

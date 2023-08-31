@@ -3,6 +3,7 @@
 namespace B2BPanel\SharedModels;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contractor extends Model
@@ -49,5 +50,10 @@ class Contractor extends Model
     public function nagsAsPayer(): HasMany
     {
         return $this->hasMany(Nag::class, 'logop', 'logo');
+    }
+
+    public function customerUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(CustomerUser::class, 'contractor_customer_user', 'logo', 'id');
     }
 }
