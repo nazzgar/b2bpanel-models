@@ -54,6 +54,6 @@ class Contractor extends Model
 
     public function customerUsers(): BelongsToMany
     {
-        return $this->belongsToMany(CustomerUser::class, 'contractor_customer_user', 'logo', 'id');
+        return $this->belongsToMany(CustomerUser::class, 'contractor_customer_user', 'logo', 'customer_user_id');
     }
 }
