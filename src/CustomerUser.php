@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+
 
 class CustomerUser extends Authenticatable
 {
@@ -51,7 +53,7 @@ class CustomerUser extends Authenticatable
 
     public static function createAndAddContractor(string $name, string $email, string $password, string $logo): self
     {
-        $customer_user =  self::create([
+        $customer_user = self::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password)
