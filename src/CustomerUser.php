@@ -48,4 +48,17 @@ class CustomerUser extends Authenticatable
     {
         return $this->belongsToMany(Contractor::class, 'contractor_customer_user', 'customer_user_id', 'logo');
     }
+
+    public static function createAndAddContractor(string $name, string $email, string $password, string $logo): self
+    {
+        $customer_user =  self::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make($password)
+        ]);
+
+        $customer_user->contractors()->attach($logo);
+
+        return $customer_user;
+    }
 }
