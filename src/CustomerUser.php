@@ -46,6 +46,7 @@ class CustomerUser extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //TODO: narazie zakladam ze jeden uzytkownik bedzie mial jednego kontrahenta
     public function contractors(): BelongsToMany
     {
         return $this->belongsToMany(Contractor::class, 'contractor_customer_user', 'customer_user_id', 'logo');
