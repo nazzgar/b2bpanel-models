@@ -16,6 +16,7 @@ class Returnm extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'customer_user_id',
         'status',
     ];
 
