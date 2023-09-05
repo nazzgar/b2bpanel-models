@@ -5,6 +5,7 @@ namespace B2BPanel\SharedModels;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -63,5 +64,10 @@ class CustomerUser extends Authenticatable
         $customer_user->contractors()->attach($logo);
 
         return $customer_user;
+    }
+
+    public function returnm(): HasOne
+    {
+        return $this->hasOne(Returnm::class);
     }
 }
