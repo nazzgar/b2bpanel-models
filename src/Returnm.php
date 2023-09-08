@@ -20,6 +20,8 @@ class Returnm extends Model
         'status',
     ];
 
+    protected $with = ['returnlines'];
+
     /**
      * Faktury na których kontrahent jest płatnikiem
      */
