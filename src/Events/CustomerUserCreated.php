@@ -2,6 +2,7 @@
 
 namespace B2BPanel\SharedModels\Events;
 
+use B2BPanel\SharedModels\CustomerUser;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,9 +18,8 @@ class CustomerUserCreated
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(public CustomerUser $customer_user)
     {
-        //
     }
 
     /**

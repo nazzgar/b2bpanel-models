@@ -3,6 +3,8 @@
 namespace B2BPanel\SharedModels;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use B2BPanel\SharedModels\Events\CustomerUserCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -45,6 +47,15 @@ class CustomerUser extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => CustomerUserCreated::class,
     ];
 
     //TODO: narazie zakladam ze jeden uzytkownik bedzie mial jednego kontrahenta
