@@ -5,6 +5,8 @@ namespace B2BPanel\SharedModels;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use B2BPanel\SharedModels\Events\CustomerUserCreated;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -16,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class CustomerUser extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -55,7 +57,7 @@ class CustomerUser extends Authenticatable
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => CustomerUserCreated::class,
+        'created' => Registered::class,
     ];
 
     //TODO: narazie zakladam ze jeden uzytkownik bedzie mial jednego kontrahenta
