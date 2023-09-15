@@ -7,6 +7,7 @@ namespace B2BPanel\SharedModels;
 use B2BPanel\SharedModels\Events\CustomerUserCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as AuthMustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class CustomerUser extends Authenticatable
+class CustomerUser extends Authenticatable implements AuthMustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
 
