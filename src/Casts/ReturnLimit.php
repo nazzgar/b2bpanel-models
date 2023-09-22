@@ -11,6 +11,7 @@ class ReturnLimit implements CastsAttributes
 {
     public function get(Model $model, string $key, mixed $value, array $attributes): ReturnLimitValueObject
     {
+        //TODO: unserialize
         return new ReturnLimitValueObject(
             $attributes['zabawki'],
             $attributes['jezykowe'],
@@ -26,12 +27,14 @@ class ReturnLimit implements CastsAttributes
             throw new InvalidArgumentException('The given value is not an ReturnLimitValueObject instance.');
         }
 
-        return [
+        return ['limits' => serialize($value)];
+
+        /* return [
             'zabawki' => $value->zabawki,
             'jezykowe' => $value->jezykowe,
             'jezykowe_oxford' => $value->jezykowe_oxford,
             'edukacyjne' => $value->edukacyjne,
             'pozostale' => $value->pozostale,
-        ];
+        ]; */
     }
 }
