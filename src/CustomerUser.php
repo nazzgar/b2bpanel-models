@@ -10,6 +10,7 @@ use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as AuthMustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -80,8 +81,8 @@ class CustomerUser extends Authenticatable implements AuthMustVerifyEmail
         return $customer_user;
     }
 
-    public function returnm(): HasOne
+    public function returnm(): HasMany
     {
-        return $this->hasOne(Returnm::class);
+        return $this->hasMany(Returnm::class);
     }
 }

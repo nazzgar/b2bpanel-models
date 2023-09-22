@@ -35,4 +35,9 @@ class Returnm extends Model
     {
         return $this->belongsTo(CustomerUser::class);
     }
+
+    public function returnCampaign(): BelongsTo
+    {
+        return $this->belongsTo(ReturnCampaign::class);
+    }
 }
