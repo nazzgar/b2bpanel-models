@@ -85,4 +85,9 @@ class CustomerUser extends Authenticatable implements AuthMustVerifyEmail
     {
         return $this->hasMany(Returnm::class);
     }
+
+    public function returnLimit(): HasMany
+    {
+        return $this->hasMany(ReturnLimit::class);
+    }
 }

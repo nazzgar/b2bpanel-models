@@ -2,6 +2,7 @@
 
 namespace B2BPanel\SharedModels;
 
+use B2BPanel\SharedModels\Casts\ReturnLimit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -20,12 +21,14 @@ class ReturnCampaign extends Model
     protected $fillable = [
         'name',
         'date_start',
-        'date_end'
+        'date_end',
+        'limits'
     ];
 
     protected $casts = [
         'date_start' => 'datetime',
-        'date_end' => 'datetime'
+        'date_end' => 'datetime',
+        'limits' => ReturnLimit::class,
     ];
 
     public function Returnm(): HasMany
