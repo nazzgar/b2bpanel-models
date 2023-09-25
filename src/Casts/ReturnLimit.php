@@ -11,14 +11,7 @@ class ReturnLimit implements CastsAttributes
 {
     public function get(Model $model, string $key, mixed $value, array $attributes): ReturnLimitValueObject
     {
-        //TODO: unserialize
-        return new ReturnLimitValueObject(
-            $attributes['zabawki'],
-            $attributes['jezykowe'],
-            $attributes['jezykowe_oxford'],
-            $attributes['edukacyjne'],
-            $attributes['pozostale']
-        );
+        return unserialize($attributes[['limits']]);
     }
 
     public function set(Model $model, string $key, mixed $value, array $attributes): array
