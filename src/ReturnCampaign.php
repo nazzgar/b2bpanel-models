@@ -3,6 +3,7 @@
 namespace B2BPanel\SharedModels;
 
 use B2BPanel\SharedModels\Casts\ReturnLimit;
+use B2BPanel\SharedModels\ValueObjects\ReturnLimit as ReturnLimitValueObject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -34,5 +35,14 @@ class ReturnCampaign extends Model
     public function Returnm(): HasMany
     {
         return $this->hasMany(Returnm::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (ReturnCampaign $return_campaign) {
+            if ($return_campaign->limits === null) {
+                $return_campaign->limits = new ReturnLimitValueObject(0.0, 0.0, 0.0, 0.0, 0.0);
+            }
+        });
     }
 }
