@@ -9,8 +9,12 @@ use InvalidArgumentException;
 
 class ReturnLimit implements CastsAttributes
 {
-    public function get(Model $model, string $key, mixed $value, array $attributes): ReturnLimitValueObject
+    public function get(Model $model, string $key, mixed $value, array $attributes): ReturnLimitValueObject | null
     {
+        if ($attributes['limits'] === null) {
+            return null;
+        }
+
         return unserialize($attributes['limits']);
     }
 
