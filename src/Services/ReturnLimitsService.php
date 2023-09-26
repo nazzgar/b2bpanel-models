@@ -3,6 +3,7 @@
 namespace B2BPanel\SharedModels\Services;
 
 use B2BPanel\SharedModels\CustomerUser;
+use B2BPanel\SharedModels\Exceptions\NoCurrentReturnCampaignException;
 use B2BPanel\SharedModels\Interfaces\DefaultReturnLimitResolver;
 use B2BPanel\SharedModels\ReturnCampaign;
 use B2BPanel\SharedModels\ReturnLimit;
@@ -19,7 +20,7 @@ class ReturnLimitsService
             ->first();
 
         if ($curr_return_campaign === null) {
-            //TODO: no current campaign, throw error 
+            throw new NoCurrentReturnCampaignException();
         }
 
         /** @var ReturnLimit | null $return_limit */
