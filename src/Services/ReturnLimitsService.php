@@ -41,6 +41,6 @@ class ReturnLimitsService
 
         //TODO: obsłużyć przypadek gdy płatnik rozlicza odbiorców
 
-        return $lin_service->getLins($user);
+        return $lin_service->getLinsForReturnValueLimit($user);
     }
 }
