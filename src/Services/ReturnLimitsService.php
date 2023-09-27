@@ -35,12 +35,44 @@ class ReturnLimitsService
         return $return_limit->limits;
     }
 
-    public function getValues(CustomerUser $user, ReturnCampaign $return_campaign, LinsService $lin_service) //: ReturnLimitByValueValueObject
+    public function getValues(CustomerUser $user, ReturnCampaign $return_campaign, LinsService $lin_service): ReturnLimitByValueValueObject
     {
         $return_limit = $this->getPercentages($user, $return_campaign);
 
         //TODO: obsłużyć przypadek gdy płatnik rozlicza odbiorców
 
-        return $lin_service->getLinsForReturnValueLimit($user);
+        $lins =  $lin_service->getLinsForReturnValueLimit($user);
+
+        $jezykowe =  intval($lins->filter(function ($value, $key) {
+            return $value->typ_oferty === 'Językowe' and $value->wydawnictwo !== 'Oxford University Press';
+        })->reduce(function ($carry, $item) {
+            return $carry + $item->ilosc * $item->netto;
+        }, 0) * $return_limit->jezykowe);
+
+        $zabawki =  intval($lins->filter(function ($value, $key) {
+            return $value->typ_oferty === 'Zabawki';
+        })->reduce(function ($carry, $item) {
+            return $carry + $item->ilosc * $item->netto;
+        }, 0) * $return_limit->zabawki);
+
+        $jezykowe_oxford =  intval($lins->filter(function ($value, $key) {
+            return $value->typ_oferty === 'Językowe' and $value->wydawnictwo === 'Oxford University Press';
+        })->reduce(function ($carry, $item) {
+            return $carry + $item->ilosc * $item->netto;
+        }, 0) * $return_limit->jezykowe_oxford);
+
+        $edukacyjne =  intval($lins->filter(function ($value, $key) {
+            return $value->typ_oferty === 'Edukacja';
+        })->reduce(function ($carry, $item) {
+            return $carry + $item->ilosc * $item->netto;
+        }, 0) * $return_limit->edukacyjne);
+
+        $pozostale =  intval($lins->filter(function ($value, $key) {
+            return $value->typ_oferty === 'Pozostałe';
+        })->reduce(function ($carry, $item) {
+            return $carry + $item->ilosc * $item->netto;
+        }, 0) * $return_limit->pozostale);
+
+        return new ReturnLimitByValueValueObject($zabawki, $jezykowe, $jezykowe_oxford, $edukacyjne, $pozostale);
     }
 }
