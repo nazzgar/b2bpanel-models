@@ -8,34 +8,39 @@ use B2BPanel\SharedModels\Interfaces\DefaultReturnLimitResolver;
 use B2BPanel\SharedModels\ReturnCampaign;
 use B2BPanel\SharedModels\ReturnLimit;
 use B2BPanel\SharedModels\ValueObjects\ReturnLimit as ReturnLimitValueObject;
+use B2BPanel\SharedModels\ValueObjects\ReturnLimitByValue as ReturnLimitByValueValueObject;
 
 class ReturnLimitsService
 {
 
-    public function getPercentages(CustomerUser $user): ReturnLimitValueObject
+    public function getPercentages(CustomerUser $user, ReturnCampaign $return_campaign): ReturnLimitValueObject
     {
         /** @var ReturnCampaign | null $curr_return_campaign */
-        $curr_return_campaign = ReturnCampaign::where('date_start', '<=', \Carbon\Carbon::now()->toDateString())
+        /*         $curr_return_campaign = ReturnCampaign::where('date_start', '<=', \Carbon\Carbon::now()->toDateString())
             ->where('date_end', '>=', \Carbon\Carbon::now()->toDateString())
             ->first();
 
         if ($curr_return_campaign === null) {
             throw new NoCurrentReturnCampaignException();
-        }
+        } */
 
         /** @var ReturnLimit | null $return_limit */
-        $return_limit = $user->returnLimit()->where('return_campaign_id', $curr_return_campaign->id)->first();
+        $return_limit = $user->returnLimit()->where('return_campaign_id', $return_campaign->id)->first();
 
         if ($return_limit === null) {
             //return default limit values
-            return $curr_return_campaign->limits;
+            return $return_campaign->limits;
         }
 
         return $return_limit->limits;
     }
 
-    public function getValues(CustomerUser $user)
+    public function getValues(CustomerUser $user, ReturnCampaign $return_campaign, LinsService $lin_service) //: ReturnLimitByValueValueObject
     {
-        $return_limit = $this->getPercentages($user);
+        $return_limit = $this->getPercentages($user, $return_campaign);
+
+        //TODO: obsłużyć przypadek gdy płatnik rozlicza odbiorców
+
+        return $lin_service->getLins($user);
     }
 }
