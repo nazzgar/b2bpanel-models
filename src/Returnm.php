@@ -18,6 +18,7 @@ class Returnm extends Model
     protected $fillable = [
         'customer_user_id',
         'status',
+        'return_campaign_id'
     ];
 
     protected $with = ['returnlines'];
