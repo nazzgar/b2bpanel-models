@@ -30,8 +30,6 @@ class Announcement extends Model
     protected $casts = [
         'start_showing_at' => 'datetime',
         'stop_showing_at' => 'datetime',
-        //TODO: sth is wrong with attribute boolean cast
-        'isVisible' => 'boolean',
         'is_visible' => 'boolean'
     ];
 
@@ -45,7 +43,7 @@ class Announcement extends Model
     protected function isVisible(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => "dasdas" //Carbon::now()->between($attributes['start_showing_at'], $attributes['stop_showing_at'])
+            get: fn (mixed $value, array $attributes) => Carbon::now()->between($attributes['start_showing_at'], $attributes['stop_showing_at'])
         );
     }
 }
