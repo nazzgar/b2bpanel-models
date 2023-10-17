@@ -35,10 +35,17 @@ class Announcement extends Model
         'is_visible' => 'boolean'
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['is_visible'];
+
     protected function isVisible(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Carbon::now()->between($attributes['start_showing_at'], $attributes['stop_showing_at'])
+            get: fn (mixed $value, array $attributes) => "dasdas" //Carbon::now()->between($attributes['start_showing_at'], $attributes['stop_showing_at'])
         );
     }
 }
