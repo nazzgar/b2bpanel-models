@@ -56,4 +56,9 @@ class Contractor extends Model
     {
         return $this->belongsToMany(CustomerUser::class, 'contractor_customer_user', 'logo', 'customer_user_id');
     }
+
+    public function returnCampaigns(): BelongsToMany
+    {
+        return $this->belongsToMany(ReturnCampaign::class);
+    }
 }

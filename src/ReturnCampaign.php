@@ -48,6 +48,11 @@ class ReturnCampaign extends Model
             ->first();
     }
 
+    public function contractors(): BelongsToMany
+    {
+        return $this->belongsToMany(Contractor::class);
+    }
+
     protected static function booted(): void
     {
         static::saving(function (ReturnCampaign $return_campaign) {
