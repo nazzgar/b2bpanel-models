@@ -23,16 +23,16 @@ class ReturnCampaign extends Model
         'name',
         'date_start',
         'date_end',
-        'date_invoices_from',
-        'date_invoices_to',
+        'invoices_from',
+        'invoices_to',
         'limits'
     ];
 
     protected $casts = [
         'date_start' => 'datetime',
         'date_end' => 'datetime',
-        'date_invoices_from' => 'datetime',
-        'date_invoices_to' => 'datetime',
+        'invoices_from' => 'datetime',
+        'invoices_to' => 'datetime',
         'limits' => ReturnLimit::class,
     ];
 
