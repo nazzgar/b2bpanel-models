@@ -41,7 +41,7 @@ class ReturnCampaign extends Model
         return $this->hasMany(Returnm::class);
     }
 
-    public static function current(): self
+    public static function current(): self | null
     {
         return ReturnCampaign::where('date_start', '<=', \Carbon\Carbon::now()->toDateString())
             ->where('date_end', '>=', \Carbon\Carbon::now()->toDateString())
