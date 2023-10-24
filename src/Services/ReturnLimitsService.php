@@ -2,6 +2,7 @@
 
 namespace B2BPanel\SharedModels\Services;
 
+use B2BPanel\SharedModels\Contractor;
 use B2BPanel\SharedModels\CustomerUser;
 use B2BPanel\SharedModels\Exceptions\NoCurrentReturnCampaignException;
 use B2BPanel\SharedModels\Interfaces\DefaultReturnLimitResolver;
@@ -41,7 +42,7 @@ class ReturnLimitsService
 
         //TODO: obsłużyć przypadek gdy płatnik rozlicza odbiorców
 
-        $lins =  $lin_service->getLinsForReturnValueLimit($user);
+        $lins =  $lin_service->getLinsForReturnValueLimit($user, $return_campaign);
 
         $jezykowe =  intval($lins->filter(function ($value, $key) {
             return $value->typ_oferty === 'Językowe' and $value->wydawnictwo !== 'Oxford University Press';
@@ -74,5 +75,14 @@ class ReturnLimitsService
         }, 0) * $return_limit->pozostale);
 
         return new ReturnLimitByValueValueObject($zabawki, $jezykowe, $jezykowe_oxford, $edukacyjne, $pozostale);
+    }
+
+
+    /**
+     * Set return limit for each related customeruser
+     */
+    public function setReturnLimit(Contractor $contractor, ReturnCampaign $return_campaign, ReturnLimitValueObject $return_Limit_vo)
+    {
+        $customer_users = $contractor->customerUsers;
     }
 }
