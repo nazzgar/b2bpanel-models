@@ -10,6 +10,7 @@ use B2BPanel\SharedModels\ReturnCampaign;
 use B2BPanel\SharedModels\ReturnLimit;
 use B2BPanel\SharedModels\ValueObjects\ReturnLimit as ReturnLimitValueObject;
 use B2BPanel\SharedModels\ValueObjects\ReturnLimitByValue as ReturnLimitByValueValueObject;
+use Illuminate\Database\Eloquent\Collection;
 
 class ReturnLimitsService
 {
@@ -83,6 +84,16 @@ class ReturnLimitsService
      */
     public function setReturnLimit(Contractor $contractor, ReturnCampaign $return_campaign, ReturnLimitValueObject $return_Limit_vo)
     {
+        /** @var Collection<CustomerUser> */
         $customer_users = $contractor->customerUsers;
+
+        $customer_users->each(function (CustomerUser $customer_user) use ($return_campaign, $return_Limit_vo) {
+            $return_limit = ReturnLimit::firstOrNew([
+                'customer_user_id' => $customer_user->id,
+                'return_campaign_id' => $return_campaign->id,
+            ]);
+            $return_limit->limits = $return_Limit_vo;
+            $return_limit->save();
+        });
     }
 }

@@ -18,7 +18,7 @@ class ReturnLimit extends Model
      */
     protected $fillable = [
         'customer_user_id',
-        'return_campaign_Id',
+        'return_campaign_id',
         'limits'
     ];
 
