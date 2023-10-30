@@ -96,4 +96,35 @@ class ReturnLimitsService
             $return_limit->save();
         });
     }
+
+    /**
+     * remove return limit for each related customeruser
+     */
+    public function removeReturnLimit(Contractor $contractor, ReturnCampaign $return_campaign)
+    {
+        /** @var Collection<CustomerUser> */
+        $customer_users = $contractor->customerUsers;
+
+        $customer_users->each(function (CustomerUser $customer_user) use ($return_campaign) {
+            ReturnLimit::where([
+                'customer_user_id' => $customer_user->id,
+                'return_campaign_id' => $return_campaign->id,
+            ])->delete();
+        });
+    }
+
+    /**
+     * check if return limit is set
+     */
+    public function checkIfReturnLimitExists(Contractor $contractor, ReturnCampaign $return_campaign)
+    {
+        /** @var Collection<CustomerUser> */
+        $customer_users = $contractor->customerUsers;
+
+        return $customer_users->contains(function (CustomerUser $customer_user) use ($return_campaign) {
+            return $customer_user->returnLimit->contains(function (ReturnLimit $return_limit) use ($return_campaign) {
+                return $return_limit->return_campaign_id === $return_campaign->id;
+            });
+        });
+    }
 }

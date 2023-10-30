@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class CustomerUser extends Authenticatable implements AuthMustVerifyEmail
+class CustomerUser extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
 
