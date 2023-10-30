@@ -26,7 +26,7 @@ class ReturnLimit extends Model
         'limits' => ReturnLimitCast::class
     ];
 
-    public function returnmCampaign(): BelongsTo
+    public function returnCampaign(): BelongsTo
     {
         return $this->belongsTo(ReturnCampaign::class);
     }
